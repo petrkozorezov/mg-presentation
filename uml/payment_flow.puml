@@ -1,0 +1,22 @@
+@startuml
+!include uml/style.iuml
+
+center header
+Technical interaction flow
+endheader
+
+Merchant -> RBKmoney: start_payment
+RBKmoney -> Merchant: ID
+
+RBKmoney -> Antifraud: inspect
+Antifraud -> RBKmoney: low_risk
+
+RBKmoney -> Bank: auth_payment
+Bank -> RBKmoney: in_progress
+...
+Bank -> RBKmoney: ok
+
+RBKmoney --> Merchant: {payment_finished, success, ID}
+
+
+@enduml

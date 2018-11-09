@@ -1,0 +1,12 @@
+@startuml
+!include uml/style.iuml
+
+mg -> processing_processor: process_signal(timeout, {ID, History})
+note over mg: [{initialized, PaymentParams}, {antifraud, low_risk}, authorizing, {authorized, AuthCode}]
+
+processing_processor -> merchant: notify(ID, success)
+merchant -> processing_processor: ok
+processing_processor -> mg: {[{authorized, AuthCode}], ?THREE_MONTH}
+
+note over mg: [{initialized, PaymentParams}, {antifraud, low_risk}, authorizing, {authorized, AuthCode}, notified]
+@enduml

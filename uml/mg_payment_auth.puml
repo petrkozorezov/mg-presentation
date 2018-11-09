@@ -1,0 +1,27 @@
+@startuml
+!include uml/style.iuml
+
+participant mg
+participant processing_processor
+participant processing
+participant bank
+
+mg -> processing_processor: process_signal(timeout, {ID, History})
+note over mg: [{initialized, PaymentParams}, {antifraud, low_risk}]
+
+processing_processor -> bank: auth_payment(ID, Amount, CardData)
+bank -> processing_processor: in_progress
+processing_processor -> mg: {[authorizing], ?MINUTE}
+note over mg: [{initialized, PaymentParams}, {antifraud, low_risk}, authorizing]
+
+...
+
+bank -> processing: auth_success(AuthCode)
+processing -> mg: call({auth_success, AuthCode})
+mg -> processing_processor: process_call({auth_success, AuthCode}, {ID, History})
+processing_processor -> mg: {ok, [{authorized, AuthCode}], 0}
+note over mg: [{initialized, PaymentParams}, {antifraud, low_risk}, authorizing, {authorized, AuthCode}]
+
+mg -> processing: ok
+processing -> bank: ok
+@enduml

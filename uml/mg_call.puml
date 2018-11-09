@@ -1,0 +1,15 @@
+@startuml
+!include uml/style.iuml
+
+center header
+Call machine
+endheader
+
+-> service
+service -> mg: call(ID, Args, HistoryRange)
+mg -> processor: process_call(Args, Machine={ID, History, ...})
+processor -> mg: {CallResult, Events}
+mg -> service: CallResult
+<- service
+
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+[*] -down-> started: start_payment
+started -right-> inspected: inspect_payment
+inspected -right-> 3ds: high risk
+3ds --> auth: 3ds succeess
+3ds --> error: timeout
+inspected --> auth: low risk
+auth -right-> authorized: bank authorization success
+auth --> error: bank auth error
+authorized --> [*]: timeout
+@enduml

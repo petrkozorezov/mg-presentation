@@ -1,0 +1,12 @@
+@startuml
+!include uml/style.iuml
+
+mg -> processing_processor: process_signal(timeout, {ID, History})
+note over mg: [{initialized, Amount}]
+processing_processor -> antifraud: inspect_payment(PamentParams)
+antifraud -> antifraud: inspect_payment
+antifraud -> processing_processor: low_risk
+processing_processor -> mg: {[{antifraud, low_risk}], 0}
+
+note over mg: [{initialized, PaymentParams}, {antifraud, low_risk}]
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+!include uml/style.iuml
+
+node Service_1
+node Service_N
+node MG_1
+node MG_N
+database Riak_1
+database Riak_N
+
+Service_1 -down- MG_1
+Service_N -down- MG_N
+
+MG_1 .right. MG_N
+MG_1 -- Riak_1
+MG_1 -- Riak_N
+MG_N -- Riak_1
+MG_N -- Riak_N
+Riak_1 .right. Riak_N
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+!include uml/style.iuml
+
+center header
+Technical interaction flow
+endheader
+
+actor Payer
+agent Merchant
+agent RBKmoney
+agent Bank
+
+Payer -> Merchant
+Merchant -> RBKmoney
+RBKmoney -> Bank
+@enduml

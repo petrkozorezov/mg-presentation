@@ -1,0 +1,12 @@
+@startuml
+!include uml/style.iuml
+
+merchant -> processing: start_payment(PamentParams={CardData, Amount, MerchantID})
+processing -> processing: generate_id()
+processing -> mg: start(ID, PamentParams)
+mg -> processing_processor: process_signal({init, PamentParams}, {ID, []})
+processing_processor -> mg: {[{initialized, PamentParams}], 0}
+note over mg: [{initialized, PaymentParams}]
+mg -> processing: ok
+processing -> merchant: {ok, ID}
+@enduml

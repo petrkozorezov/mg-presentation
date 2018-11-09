@@ -1,0 +1,17 @@
+@startuml
+!include uml/style.iuml
+
+center header
+Money and service interaction flow
+endheader
+
+actor Payer
+agent Merchant
+agent RBKmoney
+agent Bank
+
+Bank -> RBKmoney: 99$
+RBKmoney -> Merchant: 95$
+
+Merchant -> Payer: Service
+@enduml

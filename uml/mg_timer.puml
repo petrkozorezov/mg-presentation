@@ -1,0 +1,21 @@
+@startuml
+!include uml/style.iuml
+
+center header
+Handle timer
+endheader
+
+-> service
+service -> mg: start(ID, Args)
+mg -> processor: process_signal({init, Args}, Machine)
+processor -> mg: {Events, Timer}
+mg -> service: ok
+<- service
+...
+mg -> processor: process_signal(timeout, Machine)
+processor -> mg: {Events, Timer}
+...
+mg -> processor: process_signal(timeout, Machine)
+processor -> mg: Events
+
+@enduml
