@@ -1,0 +1,19 @@
+@startuml
+!include img/style.iuml
+
+User -> Publisher: open web page
+Publisher -> SSP: request ad
+SSP -> Exg: request bid
+Exg -> DSP1: request bid
+Exg -> DSP2: request bid
+Exg -> DSPn: request bid
+...
+DSP1 -> Exg: bid
+DSP2 -> Exg: bid
+DSPn -> Exg: bid
+Exg -> DSP1: win
+Exg -> SSP: bid
+SSP -> Publisher: ad
+Publisher -> User: page with ad
+
+@enduml

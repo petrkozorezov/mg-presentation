@@ -1,0 +1,19 @@
+@startuml
+!include img/style.iuml
+
+agent "AD Exchange" as Exg
+database "Domain Config\n(meck mock)" as DomainConfig
+agent "SSP\n(test)" as SSP
+agent "DSP 1\n(http mock)" as DSP1
+agent "DSP 2\n(http mock)" as DSP2
+agent "DSP 3\n(http mock)" as DSP3
+agent "Antifraud\n(http mock)" as Antifraud
+
+Exg -right-> DomainConfig : read config (0)
+SSP -right-> Exg: bid request (1)
+Exg -up-> Antifraud : fraud check  (2)
+Exg --> DSP1 : bid request  (3)
+Exg --> DSP2 : bid request  (4)
+Exg --> DSP3 : bid request  (5)
+
+@enduml
