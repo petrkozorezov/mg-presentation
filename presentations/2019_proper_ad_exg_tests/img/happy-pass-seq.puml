@@ -1,0 +1,14 @@
+@startuml
+!include img/style.iuml
+
+SSP -> Exg: bid:req:bid_req:2, 2.91
+Exg -> Antifraud: fraud_check:req:
+Antifraud -> Exg: fraud_check:resp:{ok, 0}
+Exg -> DSP_1: bid:req:bid_req:2, 5.18
+Exg -> DSP_2: bid:req:bid_req:2, 4.89
+DSP_1 -> Exg: bid:resp:{ok, no_bid}
+Exg -> DSP_3: bid:req:bid_req:2, 4.83
+DSP_3 -> Exg: bid:resp:{ok, no_bid}
+DSP_2 -> Exg: bid:resp:{ok, {bid, bid_req:2, 3.38}}
+Exg -> SSP: bid_response:no_bid
+@enduml

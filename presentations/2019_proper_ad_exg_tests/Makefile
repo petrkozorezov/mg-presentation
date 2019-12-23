@@ -1,7 +1,7 @@
 -include ../../Makefile
 BS        = $(shell which bs 2>/dev/null)
 PUML      = $(shell which puml 2>/dev/null)
-SVG_FILES = img/bid-request-seq.svg img/happy-pass-arch.svg
+SVG_FILES = img/bid-request-seq.svg img/happy-pass-arch.svg img/happy-pass-seq.svg
 
 .PHONY: serve pdf img
 
